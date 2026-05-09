@@ -28,6 +28,7 @@ twitch_miner = TwitchChannelPointsMiner(
     disable_ssl_cert_verification=False,        # Set to True at your own risk and only to fix SSL: CERTIFICATE_VERIFY_FAILED error
     disable_at_in_nickname=False,               # Set to True if you want to check for your nickname mentions in the chat even without @ sign
     watch_only_drops=False,                       # Set to True to watch only channels with active drops
+    stop_watch_when_drops_completed=False,        # Set to True to stop watching a channel once its drops are completed
     logger_settings=LoggerSettings(
         save=True,                              # If you want to save logs in a file (suggested)
         console_level=logging.INFO,             # Level of logs - use logging.DEBUG for more info

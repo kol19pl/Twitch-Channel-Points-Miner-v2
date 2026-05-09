@@ -184,6 +184,9 @@ class Streamer(object):
             and self.stream.campaigns_ids != []
         )
 
+    def has_drops_available(self):
+        return self.stream.campaigns != []
+
     def viewer_has_points_multiplier(self):
         return self.activeMultipliers is not None and len(self.activeMultipliers) > 0
 
