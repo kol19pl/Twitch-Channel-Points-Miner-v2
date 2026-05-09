@@ -373,7 +373,7 @@ class Twitch(object):
             logger.error(f"Error with update_client_version: {e}")
             return self.client_version
 
-    def send_minute_watched_events(self, streamers, priority, chunk_size=3):
+    def send_minute_watched_events(self, streamers, priority, watch_only_drops=False, chunk_size=3):
         while self.running:
             try:
                 streamers_index = [
@@ -391,6 +391,12 @@ class Twitch(object):
                         # Why this user It's currently online but the last updated was more than 10minutes ago?
                         # Please perform a manually update and check if the user it's online
                         self.check_streamer_online(streamers[index])
+
+                if watch_only_drops is True:
+                    streamers_index = [
+                        index for index in streamers_index
+                        if streamers[index].drops_condition() is True
+                    ]
 
                 """
                 Twitch has a limit - you can't watch more than 2 channels at one time.
