@@ -17,7 +17,10 @@ from TwitchChannelPointsMiner.classes.entities.Streamer import (
     Streamer,
     StreamerSettings,
 )
-from TwitchChannelPointsMiner.classes.Exceptions import StreamerDoesNotExistException
+from TwitchChannelPointsMiner.classes.Exceptions import (
+    StreamerDoesNotExistException,
+    TwitchRequestException,
+)
 from TwitchChannelPointsMiner.classes.Settings import FollowersOrder, Priority, Settings
 from TwitchChannelPointsMiner.classes.Twitch import Twitch
 from TwitchChannelPointsMiner.classes.WebSocketsPool import WebSocketsPool
@@ -316,6 +319,10 @@ class TwitchChannelPointsMiner:
                         logger.info(
                             f"Streamer {username} does not exist",
                             extra={"emoji": ":cry:"},
+                        )
+                    except TwitchRequestException:
+                        logger.error(
+                            f"Could not load streamer {username}: Twitch request failed"
                         )
 
             # Populate the streamers with default values.
