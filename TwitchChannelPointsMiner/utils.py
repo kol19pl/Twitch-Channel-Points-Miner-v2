@@ -147,10 +147,10 @@ def set_default_settings(settings, defaults):
     return 0 if char == "A" else 1'''
 
 
-def internet_connection_available(host="8.8.8.8", port=53, timeout=3):
+def internet_connection_available(host="gql.twitch.tv", port=443, timeout=3):
     try:
-        socket.setdefaulttimeout(timeout)
-        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
+        with socket.create_connection((host, port), timeout=timeout):
+            pass
         return True
     except socket.error:
         return False
