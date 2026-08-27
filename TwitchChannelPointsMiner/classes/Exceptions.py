@@ -2,10 +2,6 @@ class StreamerDoesNotExistException(Exception):
     pass
 
 
-class TwitchRequestException(Exception):
-    pass
-
-
 class StreamerIsOfflineException(Exception):
     pass
 

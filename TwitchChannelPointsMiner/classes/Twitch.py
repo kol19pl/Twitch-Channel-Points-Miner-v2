@@ -28,7 +28,6 @@ from TwitchChannelPointsMiner.classes.entities.Drop import Drop
 from TwitchChannelPointsMiner.classes.Exceptions import (
     StreamerDoesNotExistException,
     StreamerIsOfflineException,
-    TwitchRequestException,
 )
 from TwitchChannelPointsMiner.classes.Settings import (
     Events,
@@ -209,8 +208,6 @@ class Twitch(object):
         json_data = copy.deepcopy(GQLOperations.GetIDFromLogin)
         json_data["variables"]["login"] = streamer_username
         json_response = self.post_gql_request(json_data)
-        if json_response == {}:
-            raise TwitchRequestException
         if (
             "data" not in json_response
             or "user" not in json_response["data"]
@@ -298,7 +295,6 @@ class Twitch(object):
                     "User-Agent": self.user_agent,
                     "X-Device-Id": self.device_id,
                 },
-                timeout=10,
             )
             logger.debug(
                 f"Data: {json_data}, Status code: {response.status_code}, Content: {response.text}"
