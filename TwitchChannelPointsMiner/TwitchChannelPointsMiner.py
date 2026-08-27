@@ -247,15 +247,6 @@ class TwitchChannelPointsMiner:
             self.running = True
             self.start_datetime = datetime.now()
 
-            while self.running and internet_connection_available() is False:
-                logger.warning(
-                    "No internet connection available! Retry after 10s"
-                )
-                time.sleep(10)
-
-            if self.running is False:
-                return
-
             self.twitch.login()
 
             if self.claim_drops_startup is True:

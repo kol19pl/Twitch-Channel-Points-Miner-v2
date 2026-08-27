@@ -232,7 +232,7 @@ class Twitch(object):
                     last_cursor = f["cursor"]
 
                 has_next = follows_response["pageInfo"]["hasNextPage"]
-            except (KeyError, TypeError):
+            except KeyError:
                 return []
         return follows
 
